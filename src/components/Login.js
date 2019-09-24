@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import BackToHome from './BackToHome';
 
 class Login extends Component {
 
@@ -70,7 +71,7 @@ class Login extends Component {
                             <br />
                             <input type="button" onClick={this.submitForm} value="submit" />
                         </form>
-
+                        <BackToHome />
                     </div>
                 </>
             )
