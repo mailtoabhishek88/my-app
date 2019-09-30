@@ -1,9 +1,9 @@
-.box1{background:green;}
-.box2{background:blue;}
-.box3{background:red;}
-.box4{background:magenta;}
-.box5{background:yellow;}
-.box6{background:pink;}
+.box1{background:green;border:1px solid black;}
+.box2{background:blue;border:1px solid black;}
+.box3{background:red;border:1px solid black;}
+.box4{background:magenta;border:1px solid black;}
+.box5{background:yellow;border:1px solid black;}
+.box6{background:pink;border:1px solid black;}
 
 .container{
    display:flex;

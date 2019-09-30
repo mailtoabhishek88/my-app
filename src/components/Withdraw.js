@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { Component, useSelector } from 'react';
+import { useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 function Withdraw (){

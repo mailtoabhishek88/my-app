@@ -15,6 +15,12 @@ import Withdraw from './components/Withdraw';
 import Deposit from './components/Deposit';
 import BalanceHomePage from './components/BalanceHomePage';
 import Home from './components/Home';
+import AgeExample from './components/AgeExample';
+import IncomeTaxHome from './components/income-tax/IncomeTaxHome';
+import GrowthWithHooks from './components/hooks-example/GrowthWithHooks';
+import FetchExample from './components/hooks-example/FetchExample';
+import UseMemoExample from './components/hooks-example/UseMemoExample';
+// import AddAB from './components/AddAB';
 
 const Test = (props) =>{
   return ( 
@@ -143,12 +149,17 @@ class App extends React.Component {
           <Route path="/withdraw" exact strict component={Withdraw} />
           <Route path="/balance-page" exact strict component={BalanceHomePage} />
           <Route path="/deposit" exact strict component={Deposit} />
+          <Route path="/age-example" exact strict component={AgeExample} />
+          <Route path="/income-tax-example" exact strict component={IncomeTaxHome} />
+          <Route path="/hooks-usestate-useeffect" exact strict component={GrowthWithHooks} />
+          <Route path="/async-await-fetch" exact strict component={FetchExample} />
+          <Route path="/usememo" exact strict component={UseMemoExample} />
               
           <Route path="/mix" exact strict render={() => {
             if(this.state.loggedIn){
               return (
               
-                <div> welcome Home 
+                <div> Welcome Home 
                   <button onClick={() => {this.loginHandle(false)}}>Log-Out</button>&nbsp;
                   <button onClick={() => this.changeName('Awesome Techsith')}>Change Bold Title</button>
                   <input type="text" placeholder="Change name editing this" 

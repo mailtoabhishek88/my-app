@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import ageReducer from './reducer/ageReducer';
 import balanceReducer from './reducer/balanceReducer';
 import loanReducer from './reducer/loanReducer';
+// import addAReducer from './reducer/addAReducer';
 import { BrowserRouter } from 'react-router-dom';
 
 // const store = createStore(ageReducer);
@@ -16,7 +17,8 @@ import { BrowserRouter } from 'react-router-dom';
 const store = createStore(combineReducers({
     ageReducer,
     balanceReducer,
-    loanReducer
+    loanReducer,
+    // addAReducer
 }));
 
 ReactDOM.render(<Provider store={store}>

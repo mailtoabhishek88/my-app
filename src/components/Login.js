@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import BackToHome from './BackToHome';
+import Home from './Home';
 
 class Login extends Component {
 
@@ -51,6 +52,7 @@ class Login extends Component {
             return (
                 <>
                     <div>
+                        {/* <Home /> */}
                         <form >
                             <span>UserName:- </span><input type="text" name="username" value={this.state.username}
                                 onChange={this.onChange} />

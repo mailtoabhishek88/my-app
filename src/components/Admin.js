@@ -5,11 +5,16 @@ import BackToHome from './BackToHome';
 const Admin = (props) => {
 
     let loggedIn = false;
-    if (localStorage.getItem('token')) {
-        loggedIn = true
-    }
+    
 
-    const [login, setLogin] = useState(loggedIn)
+    const [login, setLogin] = useState(loggedIn);
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            loggedIn = true
+        }
+        setLogin(loggedIn)
+    }, [])
 
     const handleLogOut = () => {
         props.history.push('/logout')

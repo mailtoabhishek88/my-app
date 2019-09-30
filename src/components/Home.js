@@ -19,6 +19,12 @@ class Home extends Component {
                     {color:'green'}
                 }> React-Redux Example(Age up/Down)</NavLink>
                 <NavLink to="/mix" className="box box6">Mixed Concepts Example</NavLink>
+                <NavLink to="/age-example" className="box box1">Age Example with Hooks</NavLink>
+                <NavLink to="/income-tax-example" className="box box1">Income-tax Example</NavLink>
+                <NavLink to="/async-await-fetch" className="box box1">Hooks (Async-await-Fetch API)</NavLink>
+                <NavLink to="/usememo" className="box box1">Hooks (useMemo)</NavLink>
+                
+                <NavLink to="/hooks-usestate-useeffect" className="box box1">Hooks (useState, useEffect)</NavLink>
             </div>
         );
     }
