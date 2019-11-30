@@ -5,10 +5,10 @@ import {Link} from 'react-router-dom'
 const Deposit =  () => {
     const balance = useSelector(state => state.balanceReducer.balance);
 
-    const dispatch = useDispatch();
+    const dispatchDeposit = useDispatch();
 
     const onDepositHandle = () => {
-        dispatch({type : "DEPOSIT", payload:10});
+        dispatchDeposit({type : "DEPOSIT", payload:10});
     }   
         return (
             <div>
@@ -20,7 +20,7 @@ const Deposit =  () => {
                     <Link to='/withdraw'>withdraw</Link>
                     
                 </div>
-                <div>Want to Home Page 
+                <div>Want to go Home Page 
                     <Link to='/balance-page'>Balance Home Page</Link>
                     
                 </div>

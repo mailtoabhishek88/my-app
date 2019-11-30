@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 const initProfile = {
     name: null,
-    followers: null
+    followers: null,
+    users : []
 }
 const FetchExample = () => {
 
@@ -9,19 +10,22 @@ const FetchExample = () => {
     const [waiting, setWaiting] = useState(true);
 
     async function getUserProfile() {
-        let userData = await fetch('https://api.github.com/users/mailtoabhishek88');
+        let userData = await fetch('https://jsonplaceholder.typicode.com/users');
         let profileData = await userData.json();
         if (profileData) {
             setUserProfile({
-                name: profileData.name
+                users: profileData
             });
             setWaiting(false)
         }
-
     }
-
+    //Will run after mounting - one time coz [] is blank
     useEffect(() => {
         getUserProfile();
+
+        return (() => {
+            console.log('clean up code')
+        })
     }, [])
 
     return (
@@ -29,7 +33,8 @@ const FetchExample = () => {
 
             Fetch Example<hr />
             <div>
-               {!waiting ? <span > Name : {userProfile.name}</span> : 'waiting'}
+               {!waiting ? <span > Users List : <ul>{userProfile.users.map(user => {
+                   return (<li key={user.id}><h3>{user.name}</h3></li>) })}</ul></span> : 'waiting'}
             </div>
         </div>
     );

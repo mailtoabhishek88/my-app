@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import BackToHome from './BackToHome';
-import Home from './Home';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Login extends Component {
 
@@ -15,7 +16,7 @@ class Login extends Component {
             username: '',
             password: '',
             loggedIn,
-            fruit: ''
+            errorMsg: ''
         }
     }
 
@@ -25,25 +26,42 @@ class Login extends Component {
         })
     }
 
-    handleChange = (e) => {
-        this.setState({
-            fruit: e.target.value
-        })
+    getUserProfile = (username, password) => {
+        axios.get('https://swapi.co/api/people/?search=' + username)
+            .then(userDetails => {
+                let users = userDetails.data.results, userFound = false;
+                if (users.length === 0) {
+                    this.setState({
+                        errorMsg: 'No users found with in Starwars World with this Name :' + username
+                    });
+                } else {
+                    users.forEach((user, index) => {
+                        if (user.name === username && user.birth_year === password) {
+                            localStorage.setItem('token', '123456789')
+                            this.setState({
+                                loggedIn: true
+                            })
+                            this.props.history.push('/admin')
+                            userFound = true;
+                        }
+                    });
+                    if (!userFound) {
+                        this.setState({ errorMsg: 'Something is not correct! Please check your username or password' })
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     }
 
     submitForm = (e) => {
         e.preventDefault();
         const { username, password } = this.state;
-
-        if (username === 'admin' && password === 'admin') {
-            localStorage.setItem('token', '123456789')
-            this.setState({
-                loggedIn: true
-            })
-            this.props.history.push('/admin')
-        }
-
+        this.getUserProfile(username, password);
     }
+
     render() {
         if (this.state.loggedIn) {
             return (<Redirect to="/admin" />)
@@ -52,24 +70,16 @@ class Login extends Component {
             return (
                 <>
                     <div>
-                        {/* <Home /> */}
                         <form >
+                            {this.state.errorMsg && <div class="alert alert-danger" role="alert">
+                                {this.state.errorMsg}
+                            </div>}
                             <span>UserName:- </span><input type="text" name="username" value={this.state.username}
                                 onChange={this.onChange} />
                             <br />
                             <span>Password:-</span><input type="password" name="password" value={this.state.password}
                                 onChange={this.onChange} />
                             <br />
-                            <label>
-                                Pick your favorite flavor:
-                                <select value={this.state.value} onChange={this.handleChange}>
-                                    <option value="grapefruit">Grapefruit</option>
-                                    <option value="lime">Lime</option>
-                                    <option value="coconut">Coconut</option>
-                                    <option value="mango">Mango</option>
-                                </select>
-                            </label>
-                            <span> {this.state.fruit}</span>
                             <br />
                             <input type="button" onClick={this.submitForm} value="submit" />
                         </form>

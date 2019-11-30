@@ -9,12 +9,17 @@ const UseMemoExample = () => {
         setAge(age + 1)
     }
 
-    // Need to send array blank to check means it has no depedency on any state/passed variable
+    // Need to send array blank to check, means it has no depedency on any state/passed variable
     const memoHandle = useMemo(() => {
         return <Child />
     }, [])
 
-    // useMemo : if we are passing same inout to any component so it should return same output everytime
+    // we have passed age, so now Child gonna check for render each n every time age changes
+    // const memoHandle = useMemo(() => {
+    //     return <Child />
+    // }, [age])
+
+    // useMemo : if we are passing same input to any component so it should return same output everytime
     // so we don't want to re-render our component again and again
     return (
         <div>

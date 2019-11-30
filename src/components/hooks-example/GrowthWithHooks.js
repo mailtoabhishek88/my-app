@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import STATIC_DATA from '../../constants/static-data';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -6,21 +6,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 let staticData = null;
 
 let initXY = {
-    x : null,
-    y : null
+    x: null,
+    y: null
 }
 
 const GrowthWithHooks = () => {
-    
+
     const [growth, setGrowth] = useState(0);
     const [born, setBorn] = useState(false);
     const [nirvana, setNirvana] = useState(false);
     const [time, setTime] = useState(Date);
     const [mousePos, setMousePos] = useState(initXY);
 
-    // Runs only at mounting -- componentDidMount
+    // Runs only at mounting lke -----> componentDidMount
     useEffect(() => {
         console.log('I am Born')
+        // Immitating API call like scenario
         setTimeout(() => {
             staticData = STATIC_DATA
         }, 2000)
@@ -29,10 +30,10 @@ const GrowthWithHooks = () => {
     // On Every Update
     useEffect(() => {
         console.log('Without second parameter run on mounting and after every update')
-        if(born) {
+        if (born) {
             console.log('I am learning and growing')
         }
-        if(growth > 50){
+        if (growth > 50) {
             setNirvana(true)
         }
 
@@ -44,9 +45,21 @@ const GrowthWithHooks = () => {
         return () => {
             console.log('Cleaning up timer handle')
             clearInterval(handle)
-            console.log('Cleaning up mistakes first for furthwr learning')
+            console.log('Cleaning up mistakes first for further learning')
         }
     })
+
+    useEffect(() => {
+        const handle = window.addEventListener('mousemove', mouseMoveHandle);
+
+        return window.removeEventListener('mousemove', handle);
+    }, [])
+
+    // Whenever any change happen to 'nirvana'
+    useEffect(() => {
+
+        document.title = nirvana ? "This is Nirvana" : 'React App'
+    }, [nirvana])
 
     const mouseMoveHandle = (event) => {
         setMousePos({
@@ -54,21 +67,12 @@ const GrowthWithHooks = () => {
             y: event.clientY
         })
     }
-    useEffect(() => {
-        const handle = window.addEventListener('mousemove', mouseMoveHandle);
 
-        return window.removeEventListener('mousemove', handle);
-    },[])
 
-    // Whenever any change happen to 'nirvana'
-    useEffect(() => {
-        
-        document.title =nirvana ? "This is Nirvana" : 'React App'
-    }, [nirvana])
 
     const growthHandle = () => {
         setBorn(true)
-        setGrowth(growth +10)
+        setGrowth(growth + 10)
     }
 
     const learnAgainHandle = () => {
@@ -76,28 +80,29 @@ const GrowthWithHooks = () => {
         setGrowth(0);
         setNirvana(false)
     }
-    if(staticData){
-    return (
-        <div>
-            Current Time is : {time}
-            Growth Home Page
-            <h2>{born ? 'Growth : ' : null } {growth}</h2>
+    if (staticData) {
+        return (
             <div>
-                {!nirvana ? <button onClick={growthHandle}> {staticData.addGrowth}</button> : <div>
-                    wanna back to old days and grow ? <button onClick={learnAgainHandle}>Learn from start Again</button>
-                </div> }
+                Current Time is : {time}
+                Growth Home Page
+            <h2>{born ? 'Growth : ' : null} {growth}</h2>
+                <div>
+                    {!nirvana ? <button onClick={growthHandle}> {staticData.addGrowth}</button> : <div>
+                        wanna back to old days and grow ? <button onClick={learnAgainHandle}>Learn from start Again</button>
+                    </div>}
+                </div>
+                <hr />
+                <div>Mouse Position : <span>{`x: ${mousePos.x} | y: ${mousePos.y}`}</span></div>
             </div>
-            <hr/>
-            <div>Mouse Position : <span>{ `x: ${mousePos.x} | y: ${mousePos.y}`}</span></div>
-        </div>
-    )}
-    else{
+        )
+    }
+    else {
         return <>
-        Loading...
+            Loading...
             <div className="spinner-border m-5" role="status">
-                
+
             </div>
-            </>
+        </>
     }
 };
 

@@ -11,6 +11,7 @@ const AgeExample = () => {
             type: "AGE_UP"
         })
     }
+    
     return (
         <div>
             <h3>Age : <span> {age}</span></h3>

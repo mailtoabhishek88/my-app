@@ -102,7 +102,7 @@ const IncomeTaxHome = () => {
                 </button>
             </div>
             <hr/>
-            <button onClick={calculateTaxAfterSaving}>Calculate Tax after showing Savings : {taxAfterSaving}</button>
+            <button onClick={calculateTaxAfterSaving}>Calculate Taxable Income after showing Savings : {taxAfterSaving}</button>
         </div>
     );
 }

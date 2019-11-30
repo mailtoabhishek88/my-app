@@ -5,7 +5,7 @@ let renderCount = 0;
 const Child = () => {
 
     useEffect(() => {
-        renderCount++
+        ++renderCount
     });
 
     return (
